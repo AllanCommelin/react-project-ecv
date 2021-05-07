@@ -9,7 +9,7 @@
       "id": 1
     },
     {
-      "user":  1,
+      "user": 1,
       "title": "TestNew3",
       "country": "DZ",
       "description": "dezdzedzdzdzdz",
@@ -17,7 +17,7 @@
       "id": 2
     },
     {
-      "user":  1,
+      "user": 1,
       "title": "Ok ça marche 4",
       "country": "DZ",
       "description": "dezdzdezed",
@@ -31,6 +31,13 @@
       "price": "40.00",
       "user": 2,
       "id": 4
+    },
+    {
+      "title": "Une pomme",
+      "image": "https://picsum.photos/200",
+      "description": "Belle pomme rouge de 12cm de diamètre",
+      "price": "2.30",
+      "id": 5
     }
   ],
   "users": [

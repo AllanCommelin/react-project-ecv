@@ -25,14 +25,20 @@ const RegisterForm = () => {
 
   const submitForm = async e => {
     e.preventDefault();
+    setError(false)
     const checkRequired = Object.keys(fields).find(key => fields[key] === '')
     if (checkRequired) {
       setError('Veuillez remplir tous les champs')
       return;
     }
 
-    dispatch(registerUser(fields))
-    history.push("/login")
+    const isOk = await dispatch(registerUser(fields))
+
+    if (isOk) {
+      history.push("/login")
+    } else {
+      setError('Une erreur est survenue !')
+    }
   }
 
   return (
@@ -45,7 +51,7 @@ const RegisterForm = () => {
         <Input label="Email" id="email" name="email" value={fields.email} handleChange={handleChangeField}  />
         <Input label="Photo de profil (url)" type="url" id="image" name="image" value={fields.image} handleChange={handleChangeField}  />
         <Input label="Mot de passe" id="password" type="password" name="password" value={fields.password} handleChange={handleChangeField}  />
-        {error && <p className="text-red-900">{error}</p>}
+        {error && <div className="p-4 my-4 rounded-md bg-red-100 border border-red-900"><p className="text-red-900">{error}</p></div>}
         <Button type="submit" text="Valider"/>
         <p className="text-center"><Link to="/register">Deja inscrit ?</Link></p>
       </form>

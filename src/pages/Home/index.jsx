@@ -1,10 +1,9 @@
-import Header from "../../components/Header";
+import Auth from "../../hoc/auth";
 
 const Home = () => (
     <>
-        <Header/>
         <h1>Accueil</h1>
     </>
 )
 
-export default Home;
+export default Auth(Home);

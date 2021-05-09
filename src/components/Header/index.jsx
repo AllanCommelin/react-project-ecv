@@ -16,12 +16,12 @@ const Header = () => {
 
   return (
     <header className="w-full h-20 px-5 flex items-end justify-between items-center bg-custom-darker-color">
-      <div>
+      <div className="flex items-center">
         <h3 className="font-black text-custom-light-color text-2xl" onClick={() => history.push('/')}>
             eProducts
         </h3>
       </div>
-      <div>
+      <div className="flex items-center">
         <button className="mx-2 py-2 px-4 text-white hover:text-custom-main-color" onClick={() => history.push('/')}>
           Accueil
         </button>
@@ -38,7 +38,10 @@ const Header = () => {
               </button>
               <button className="mx-2 py-2 px-4 rounded text-white hover:text-custom-main-color"
                       onClick={() => history.push('/profile')}>
-                Mon profil
+                  <div className="flex items-center">
+                      <img className="w-8 h-8 rounded-full object-cover mr-4" src={user.image} alt='profil'/>
+                      <span>Mon profil</span>
+                  </div>
               </button>
               <button className="mx-2 py-2 px-4 border-white hover:border-custom-main-color border-2 rounded text-white hover:text-custom-main-color"
                       onClick={logout}>

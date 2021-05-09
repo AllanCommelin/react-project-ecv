@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 
 const Input = ({ type, label, name, placeholder, step, minlength, maxlength, required, handleChange, value, error, className }) => (
   <div className="flex flex-col mt-10">
-    <label class="block text-sm font-medium text-gray-700" htmlFor={name}>{label}</label>
+    <label className="block text-sm font-medium text-gray-700" htmlFor={name}>{label}</label>
     <input
     className={"rounded-md mt-1 border p-2 border-gray-400 " + className}
       type={type}

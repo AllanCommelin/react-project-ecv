@@ -37,8 +37,29 @@ export const registerUser = user => async dispatch => {
         })
         const data = await response.json();
         dispatch(addUser(data))
+        return response.status === 201
     } catch(e) {
-        console.error(e);
+        console.error(e)
+        return false
+    }
+}
+
+export const updateUser = user => async dispatch => {
+    try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}users/${user.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${Cookies.get('jwt')}`
+            },
+            body: JSON.stringify(user)
+        })
+        const data = await response.json();
+        dispatch(addUser(data))
+        return response.status === 200
+    } catch(e) {
+        console.error(e)
+        return false
     }
 }
 
@@ -55,7 +76,7 @@ export const loginUser = profile => async () => {
         Cookies.set('jwt', data.accessToken)
         return response.status === 200
     } catch(e) {
-        console.error(e);
+        console.error(e)
         return false
     }
 }

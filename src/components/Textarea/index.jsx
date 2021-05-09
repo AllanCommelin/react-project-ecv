@@ -2,9 +2,14 @@ import PropTypes from 'prop-types';
 
 const Textarea = ({ label, name, id, placeholder, cols, row, required, handleChange, value, error }) => (
   <div className="flex flex-col mt-10">
-    <label htmlFor={name}>{label}</label>
+    <label 
+    className="block text-sm font-medium text-gray-700"
+    htmlFor={name}
+    >{
+    label}
+    </label>
     <textarea 
-      className="border p-1"
+      className="rounded-md mt-1 border p-2 border-gray-400"
       name={name}
       id={id}
       required={required}

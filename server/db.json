@@ -1,51 +1,45 @@
 {
   "articles": [
     {
-      "user": 1,
-      "title": "The Irishman",
-      "country": "AQ",
-      "description": "efzfzefzefzefzef",
-      "price": "99.00",
-      "id": 1
-    },
-    {
-      "user":  1,
-      "title": "TestNew3",
-      "country": "DZ",
-      "description": "dezdzedzdzdzdz",
-      "price": "50.00",
-      "id": 2
-    },
-    {
-      "user":  1,
-      "title": "Ok ça marche 4",
-      "country": "DZ",
-      "description": "dezdzdezed",
-      "price": "05.00",
-      "id": 3
-    },
-    {
-      "title": "Test",
-      "country": "AR",
-      "description": "edzdzdzed",
-      "price": "40.00",
-      "user": 2,
-      "id": 4
+      "title": "Une pomme",
+      "image": "https://picsum.photos/200",
+      "description": "Belle pomme rouge de 12cm de diamètre",
+      "price": "2.30",
+      "id": 5
     }
   ],
   "users": [
     {
-      "email": "allan@gmail.com",
-      "password": "$2a$10$AkkaLichX3VWKC6qst7VXekh.XE8ltHfpyahoXwwVfojExxwcbfeC",
-      "role": "admin",
-      "id": 1
+      "id": 3,
+      "firstName": "Allan",
+      "lastName": "Commelin",
+      "birthday": "1998-02-04",
+      "email": "allan@ecv.fr",
+      "password": "$2a$10$OQAay8/a74zyKMkRpEyG5.T/UZIqu3NXvqv42GU8gEeHtmM2D1El6",
+      "image": "https://images.genius.com/a88f42a366407942b045b4b6523f28f2.218x218x1.png",
+      "createdAt": 1620568305139
     },
     {
-      "email": "test@test.com",
-      "password": "$2a$10$qJH0BKzVhApoPsQZKyzIsOdT835QG1hQXdXA0I5s.lAHrMIRlqU76",
-      "lastname": "Duez",
-      "firstname": "Samuel",
-      "id": 2
-    }
+      "email": "user1@ecv.fr",
+      "password": "$2a$10$vh2UC.NyuuOUUl5mNm1kb.BZPZnyLiJE3hbVkLI6Z.VhjkUcSIoBy",
+      "firstName": "User1",
+      "lastName": "test",
+      "birthday": "1997-03-02",
+      "role": "user",
+      "image": "https://freepikpsd.com/wp-content/uploads/2019/10/admin-logo-png-3-Free-PNG-Images-Transparent.png",
+      "createdAt": 1620569211520,
+      "id": 5
+    },
+    {
+      "email": "user2@ecv.fr",
+      "password": "$2a$10$S/5Vma/R0j4DIQlQQ0C2xeeg7EfAau76jUcgaySM7y6QTE0NG/s6m",
+      "firstName": "User1",
+      "lastName": "test",
+      "birthday": "1997-03-02",
+      "role": "user",
+      "image": "https://freepikpsd.com/wp-content/uploads/2019/10/admin-logo-png-3-Free-PNG-Images-Transparent.png",
+      "createdAt": 1620569211520,
+      "id": 6
+    },
   ]
 }

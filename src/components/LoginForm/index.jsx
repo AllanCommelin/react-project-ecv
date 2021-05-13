@@ -28,7 +28,7 @@ const LoginForm = () => {
       setError('Veuillez remplir tous les champs')
       return;
     }
-    const isOk = await dispatch(loginUser({...fields}))
+    const isOk = await dispatch(loginUser(fields))
     if (isOk) {
       setDisplayBanner(true)
       setFields({

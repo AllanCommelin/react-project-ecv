@@ -26,10 +26,16 @@ const Header = () => {
           Accueil
         </button>
         {user === null ? (
-            <button className="mx-2 py-2 px-4 border-white hover:border-custom-main-color border-2 rounded text-white hover:text-custom-main-color"
-                    onClick={() => history.push('/login')}>
-              Se connecter
-            </button>
+            <>
+                <button className="mx-2 py-2 px-4 border-white hover:border-custom-main-color border-2 rounded text-white hover:text-custom-main-color"
+                        onClick={() => history.push('/login')}>
+                    Se connecter
+                </button>
+                <button className="mx-2 py-2 px-4 border-white hover:border-custom-main-color border-2 rounded text-white hover:text-custom-main-color"
+                        onClick={() => history.push('/register')}>
+                    Inscription
+                </button>
+            </>
         ) : (
             <>
               <button className="mx-2 py-2 px-4 rounded text-white hover:text-custom-main-color"

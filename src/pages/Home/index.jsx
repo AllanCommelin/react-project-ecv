@@ -1,4 +1,4 @@
-import { getArticles, retrieveArticles } from '../../store/articles'
+import { getArticles, retrieveArticlesForHome } from '../../store/articles'
 import { useDispatch, useSelector } from 'react-redux'
 
 import ArticlePreview from '../../components/ArticlePreview'
@@ -11,7 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!articles.length) {
-      dispatch(retrieveArticles())
+      dispatch(retrieveArticlesForHome())
     }
   })
 

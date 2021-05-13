@@ -69,23 +69,27 @@ export const retrieveArticles = () => async (dispatch) => {
   }
 }
 
-export const retrieveArticlesWithFilters = (filters) => async (dispatch) => {
-  let url = `${process.env.REACT_APP_API_URL}articles`
-
-  if (filters.types.length > 0) {
-    url = `${process.env.REACT_APP_API_URL}articles${filters.types
-      .map((type, index) =>
-        index === 0 ? `?${type}=${filters.values[index]}` : `&${type}=${filters.values[index]}`
-      )
-      .join('')}`
+export const retrieveArticlesForHome = () => async (dispatch) => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}articles?_start=-3`, {
+      method: 'GET',
+    })
+    const data = await response.json()
+    dispatch(addArticles(data))
+  } catch (e) {
+    console.error(e)
   }
+}
 
+export const retrieveFilteredArticles = (url) => async (dispatch) => {
   try {
     const response = await fetch(url, {
       method: 'GET',
     })
     const data = await response.json()
     dispatch(addArticles(data))
+
+    return response
   } catch (e) {
     console.error(e)
   }

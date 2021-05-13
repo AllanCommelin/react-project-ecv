@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie'
 
 const initialState = {
-    user: null
+    user: null,
+    list: [],
 }
 
 const users = createSlice({
@@ -15,13 +16,21 @@ const users = createSlice({
         resetUser(state) {
             state.user = null
         },
+        addOrUpdateUserList(state, { payload }) {
+            state.list = [...state.list, payload]
+        },
+        addUsersList(state, { payload }) {
+            state.list = payload
+        },
     }
 });
 
 // Actions
 export const {
     addUser,
-    resetUser
+    resetUser,
+    addOrUpdateUserList,
+    addUsersList
 } = users.actions;
 
 
@@ -83,7 +92,40 @@ export const loginUser = profile => async () => {
     }
 }
 
+export const retrieveUsers = () => async dispatch => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}users`, {
+        method: 'GET',
+      })
+      const data = await response.json();
+      dispatch(addUsersList(data))
+    } catch(e) {
+      console.error(e);
+    }
+}
+
+export const retrieveUser = id => async dispatch => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}users/${id}`, {
+        method: 'GET',
+      })
+      const data = await response.json();
+      
+      dispatch(addOrUpdateUserList(data))
+    } catch(e) {
+      console.error(e);
+    }
+}
+  
+
 // Selectors
 export const getCurrentUser = (state) => state.users.user;
+
+export const getUser = (state, id) => {
+    console.log('getUser:')
+    console.log({id})
+    console.log('users.list',state.users.list)
+    return state.users.list.find(user => user.id === parseInt(id))
+};
 
 export default users.reducer;

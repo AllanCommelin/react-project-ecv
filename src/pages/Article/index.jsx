@@ -1,73 +1,112 @@
 import Auth from '../../hoc/auth'
-import {useDispatch, useSelector} from "react-redux";
-import {getCurrentUser, updateUser} from "../../store/users";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from 'react-router-dom'
+import { getArticle , getArticles, retrieveArticle, updateArticle } from "../../store/articles";
+import { getCurrentUser, getUser, retrieveUser } from "../../store/users";
 import { useHistory } from 'react-router-dom'
 import Input from "../../components/Input";
-import {useState} from "react";
+import Textarea from "../../components/Textarea";
+import {useEffect, useState} from "react";
 import Button from "../../components/Button";
 import Banner from "../../components/Banner";
 
 const Article = () => {
     const history = useHistory();
     const dispatch = useDispatch();
+
+    let { id } = useParams();
+
+    useEffect(() => {
+        dispatch(retrieveArticle(id))
+    }, [])
+
+    const article = useSelector(state => getArticle(state, id))
+    const user = useSelector(getCurrentUser)
+    
     const [displayBanner, setDisplayBanner] = useState(false)
     const closeBanner = () => setDisplayBanner(false)
     const [error, setError] = useState()
     const [toUpdate, setToUpdate] = useState(false)
+
+  
+
+
     const [fields, setFields] = useState({
-        title: '',
-        image: 'https://picsum.photos/200',
-        description: '',
-        price: '0.00',
+        title: article.title,
+        image: article.image,
+        description: article.description,
+        price: article.price,
     })
 
     const handleChangeField = ({ target: { name, value } }) => setFields({ ...fields, [name]: value })
 
-    const editUser = () => (
+    const editArticle = () => (
         <>
-            <form id="editForm" onSubmit={submitForm}>
-                <Input label="Prénom" id="firstName" name="firstName" value={fields.firstName} handleChange={handleChangeField} />
-                <Input label="Nom" id="lastName" name="lastName" value={fields.lastName} handleChange={handleChangeField}  />
-                <Input label="Date de naissance" type="date" id="birthday" name="birthday" value={fields.birthday} handleChange={handleChangeField}  />
-                <Input label="Email" id="email" name="email" value={fields.email} handleChange={handleChangeField}  />
-                <Input label="Photo de profil (url)" type="url" id="image" name="image" value={fields.image} handleChange={handleChangeField}  />
-                {error && <div className="p-4 my-4 rounded-md bg-red-100 border border-red-900"><p className="text-red-900">{error}</p></div>}
-                <Button type="submit" text="Enregistrer"/>
+            <form onSubmit={submitForm} id="editForm">
+                <Input 
+                label="Titre"
+                id="title"
+                name="title"
+                required
+                value={fields.title}
+                handleChange={handleChangeField}
+                />
+                <Input
+                label="Url Image"
+                name="image"
+                id="image"
+                type="url"
+                required
+                value={fields.image}
+                handleChange={handleChangeField}
+                />
+                <Textarea 
+                label="Description"
+                id="description"
+                name="description"
+                required
+                value={fields.description}
+                handleChange={handleChangeField}
+                />      
+                <Input 
+                label="Prix"
+                id="price"
+                name="price"
+                step="0.01"
+                type="number"
+                required
+                value={fields.price}
+                handleChange={handleChangeField}
+                />
+                <Button className="mt-4" type="submit" text="Enregistrer" />
             </form>
         </>
     )
 
-    const getAge = (date) => {
-        const birthday = new Date(date)
-        const ageDifMs = Date.now() - birthday.getTime();
-        const ageDate = new Date(ageDifMs);
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
-    }
-
-    const showUser = () => (
+    const showArticle = () => (
         <>
             <div className="p-4">
                 <fieldset className="border border-custom-main-color py-2 px-4 rounded-sm">
-                    <legend className="bg-white text-custom-main-color px-2">Prénom</legend>
-                    <span className="px-2 font-bold">{user.firstName}</span>
+                    <legend className="bg-white text-custom-main-color px-2">Titre</legend>
+                    <span className="px-2 font-bold">{article.title}</span>
                 </fieldset>
             </div>
             <div className="p-4">
                 <fieldset className="border border-custom-main-color py-2 px-4 rounded-sm">
-                    <legend className="bg-white text-custom-main-color px-2">Nom</legend>
-                    <span className="px-2 font-bold">{user.lastName}</span>
+                    <legend className="bg-white text-custom-main-color px-2">Image</legend>
+                    <img className="w-50 h-50 rounded-full object-cover" src={article.image} alt='image article'/>
                 </fieldset>
             </div>
             <div className="p-4">
                 <fieldset className="border border-custom-main-color py-2 px-4 rounded-sm">
-                    <legend className="bg-white text-custom-main-color px-2">Âge</legend>
-                    <span className="px-2 font-bold">{getAge(user.birthday)} ans</span>
+                    <legend className="bg-white text-custom-main-color px-2">Description</legend>
+                    <span className="px-2 font-bold">{article.description}</span>
                 </fieldset>
             </div>
             <div className="p-4">
                 <fieldset className="border border-custom-main-color py-2 px-4 rounded-sm">
-                    <legend className="bg-white text-custom-main-color px-2">Email</legend>
-                    <span className="px-2 font-bold">{user.email}</span>
+                    <legend className="bg-white text-custom-main-color px-2">Prix</legend>
+                    <span className="px-2 font-bold">{article.price}</span>
                 </fieldset>
             </div>
         </>
@@ -90,7 +129,7 @@ const Article = () => {
             return;
         }
 
-        const isOk = await dispatch(updateUser(fields))
+        const isOk = await dispatch(updateArticle({id: article.id, ...fields}))
 
         if (isOk) {
             setDisplayBanner(true)
@@ -102,23 +141,27 @@ const Article = () => {
         else setError('Une erreur est survenue !')
     }
 
+    console.log({user: user, article: article})
+
+    const edifyButton = () => (
+        <div>
+            <button className="p-2 rounded-sm bg-custom-dark-color border-2 border-custom-dark-color text-custom-light-color" onClick={() => btnAction()}>{ toUpdate ? 'Enregistrer' : 'Modifier' }</button>
+        </div>
+    )
+
     return (
     <div className="w-3/4 mx-auto my-8">
-        {displayBanner && <Banner text="L'utilisateur a été mise à jour avec succès" close={closeBanner} />}
+        {displayBanner && <Banner text="L'article a été mise à jour avec succès" close={closeBanner} />}
         <div className="p-8 rounded-md shadow-lg">
             <div className="flex justify-between">
                 <div className="flex items-center">
-                    <img className="w-16 h-16 rounded-full object-cover mr-4" src={user.image} alt='profil'/>
                     <h1 className="font-black text-2xl text-custom-darker-color">
-                        Bonjour
-                        <span className="text-custom-main-color">&nbsp;{user.firstName}</span> !
+                        Édition d'article
                     </h1>
                 </div>
-                <div>
-                    <button className="p-2 rounded-sm bg-custom-dark-color border-2 border-custom-dark-color text-custom-light-color" onClick={() => btnAction()}>{ toUpdate ? 'Enregistrer' : 'Modifier' }</button>
-                </div>
+                { user.id === article.user_id ? edifyButton() : null}
             </div>
-            { toUpdate ? editUser() : showUser() }
+            { toUpdate ? editArticle() : showArticle() }
         </div>
     </div>
 )}

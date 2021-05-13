@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import Cookies from 'js-cookie'
 
 const initialState = {
   list: []
@@ -10,6 +11,21 @@ const articles = createSlice({
   reducers: {
     addArticle(state, { payload }) {
       state.list = [...state.list, payload]
+    },
+    addOrUpdateArticle(state, { payload }) {
+      const index = state.list.findIndex(article => article.id === payload.id)
+
+      //add if not find
+      if (index === -1) {
+        state.list = [...state.list, payload]
+        return
+      }
+
+      state.list[index] = payload
+    },
+    findAndUpdateArticle(state, { payload }) {
+      const index = state.list.findIndex(article => article.id === payload.id)
+      state.list[index] = payload
     },
     addArticles(state, { payload }) {
       state.list = payload
@@ -24,7 +40,9 @@ const articles = createSlice({
 const {
     addArticle,
     addArticles,
-    removeArticle
+    removeArticle,
+    addOrUpdateArticle,
+    findAndUpdateArticle
 } = articles.actions;
 
 
@@ -57,6 +75,40 @@ export const retrieveArticles = () => async dispatch => {
   }
 }
 
+
+export const retrieveArticle = id => async dispatch => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}articles/${id}`, {
+      method: 'GET',
+    })
+    const data = await response.json();
+    dispatch(addOrUpdateArticle(data))
+  } catch(e) {
+    console.error(e);
+  }
+}
+
+
+export const updateArticle = article => async dispatch => {
+  try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}articles/${article.id}`, {
+          method: 'PATCH',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${Cookies.get('jwt')}`
+          },
+          body: JSON.stringify(article)
+      })
+      const data = await response.json();
+      dispatch(findAndUpdateArticle(data))
+      return response.status === 200
+  } catch(e) {
+      console.error(e)
+      return false
+  }
+}
+
+
 export const removeArticleById = id => async dispatch => {
    try {
     await fetch(`${process.env.REACT_APP_API_URL}articles/${id}`, {
@@ -72,7 +124,7 @@ export const removeArticleById = id => async dispatch => {
 // Selectors
 export const getArticles = (state) => state.articles.list;
 
-export const getArticle = (state, id) => state.articles.list.find(article => article.id === id);
+export const getArticle = (state, id) => state.articles.list.find(article => article.id === parseInt(id));
 
 const getArticleByIndex = (state, index) => state.articles.list[index];
 

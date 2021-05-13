@@ -10,7 +10,9 @@ import Home from "./pages/Home";
 import CreateArticle from './pages/CreateArticle';
 import Articles from "./pages/Articles";
 import Profile from "./pages/Profile";
+import Article from './pages/Article';
 import './tailwind.output.css'
+
 
 const App = () => (
   <Router>
@@ -18,6 +20,7 @@ const App = () => (
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <Route path="/article/create" component={CreateArticle} />
+      <Route path="/article/:id" component={Article} />
       <Route path="/articles" component={Articles} />
       <Route path="/profile" component={Profile} />
       <Route path="/" component={Home} />

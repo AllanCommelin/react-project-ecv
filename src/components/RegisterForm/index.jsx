@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 import Button from '../Button';
 import Input from '../Input';
 import { registerUser } from '../../store/users'
+import Banner from "../Banner";
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [displayBanner, setDisplayBanner] = useState(false)
   const [error, setError] = useState()
   const [fields, setFields] = useState({
     firstName: '',
@@ -20,6 +22,8 @@ const RegisterForm = () => {
     createdAt: Date.now(),
     password: ''
   })
+
+  const closeBanner = () => setDisplayBanner(false)
 
   const handleChangeField = ({ target: { name, value } }) => setFields({ ...fields, [name]: value })
 
@@ -35,7 +39,10 @@ const RegisterForm = () => {
     const isOk = await dispatch(registerUser(fields))
 
     if (isOk) {
-      history.push("/articles")
+      setDisplayBanner(true)
+      setTimeout(() => {
+        history.push('/articles')
+      }, 1000)
     } else {
       setError('Une erreur est survenue !')
     }
@@ -43,6 +50,7 @@ const RegisterForm = () => {
 
   return (
     <>
+      {displayBanner && <Banner text="Utilisateur inscrit avec succès ! Vous allez être redirigé vers l'acceuil" close={closeBanner} />}
       <h1 className="text-center py-10 font-bold text-2xl">Inscription</h1>
       <form onSubmit={submitForm} className="w-1/3 m-auto border rounded p-5">
         <Input label="Prénom" id="firstName" name="firstName" value={fields.firstName} handleChange={handleChangeField} />

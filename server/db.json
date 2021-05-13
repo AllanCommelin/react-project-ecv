@@ -76,6 +76,17 @@
       "image": "https://cdn140.picsart.com/353719829024201.jpg",
       "createdAt": 1620909075889,
       "id": 7
+    },
+    {
+      "email": "bob@durant.fr",
+      "password": "$2a$10$IYg7vsQTMqCyYG9sUeLVs..WjX9uMOwxe5TeELPYC/zevRDAY.V9O",
+      "firstName": "Bob",
+      "lastName": "Durant",
+      "birthday": "8213-03-12",
+      "role": "user",
+      "image": "https://www.headict.com/img/products2/product/CPS-TOCARD-FIT0034_1,bob-ricard.jpg",
+      "createdAt": 1620925514110,
+      "id": 8
     }
   ]
 }

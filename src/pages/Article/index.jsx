@@ -104,13 +104,10 @@ const Article = () => {
                 </fieldset>
             </div>
             <div className="p-4">
-                <Input 
-                    label="Quantité"
-                    id="price"
-                    type="number"
-                    placeholder="1"
-                    value="1"
-                    />
+                <div className="flex flex-col mt-10">
+                    <label className="block text-sm font-medium text-gray-700" htmlFor="quantity">Quantité</label>
+                    <input id="quantity" type="number" className="rounded-md mt-1 border p-2 border-gray-400" placeholder="1"/>
+                </div>
                 <Button className="mt-4" text="Commander" />
             </div>
         </>
@@ -144,8 +141,6 @@ const Article = () => {
         }
         else setError('Une erreur est survenue !')
     }
-
-    console.log({user: user, article: article})
 
     const edifyButton = () => (
         <div className="ml-auto">

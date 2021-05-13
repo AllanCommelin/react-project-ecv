@@ -121,11 +121,6 @@ export const retrieveUser = id => async dispatch => {
 // Selectors
 export const getCurrentUser = (state) => state.users.user;
 
-export const getUser = (state, id) => {
-    console.log('getUser:')
-    console.log({id})
-    console.log('users.list',state.users.list)
-    return state.users.list.find(user => user.id === parseInt(id))
-};
+export const getUser = (state, id) => state.users.list.find(user => user.id === parseInt(id));
 
 export default users.reducer;

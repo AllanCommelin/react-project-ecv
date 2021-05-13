@@ -1,6 +1,8 @@
+import Auth from '../../hoc/auth'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createArticle } from '../../store/articles'
+import { getCurrentUser } from "../../store/users";
 import Button from '../../components/Button'
 import Textarea from '../../components/Textarea'
 import Input from '../../components/Input'
@@ -9,7 +11,11 @@ import Banner from '../../components/Banner'
 const CreateArticle = () => {
   const dispatch = useDispatch();
   const [displayBanner, setDisplayBanner] = useState(false)
+
+  const user = useSelector(getCurrentUser)
+
   const [fields, setFields] = useState({
+    user_id: user.id,
     title: '',
     image: 'https://picsum.photos/200',
     description: '',
@@ -32,7 +38,13 @@ const CreateArticle = () => {
       return;
     }
     dispatch(createArticle({...fields}))
+
     setDisplayBanner(true)
+
+    setTimeout(() => {
+      setDisplayBanner(false)
+    }, 3000)
+
     setFields({
       title: '',
       image: '',
@@ -44,9 +56,9 @@ const CreateArticle = () => {
   return (
     <>
     <div className="container w-full md:w-2/3 mx-auto mt-10">
-    <h1 className="text-3xl text-blue-500 font-bold">Création d'article</h1>
+    <h1 className="text-3xl text-custom-main-color font-bold">Création d'article</h1>
       <form onSubmit={submitForm}>
-      {displayBanner && <Banner text="Article ajoute !" close={closeBanner} />}
+      {displayBanner && <Banner text="Article ajouté !" close={closeBanner} />}
         <Input 
           label="Titre"
           id="title"
@@ -89,4 +101,4 @@ const CreateArticle = () => {
   )
 }
 
-export default CreateArticle;
+export default Auth(CreateArticle);

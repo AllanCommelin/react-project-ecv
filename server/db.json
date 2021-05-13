@@ -1,11 +1,36 @@
 {
   "articles": [
     {
+      "user_id": 7,
       "title": "Une pomme",
       "image": "https://picsum.photos/200",
       "description": "Belle pomme rouge de 12cm de diamètre",
       "price": "2.30",
       "id": 5
+    },
+    {
+      "user_id": 7,
+      "title": "Asticot",
+      "image": "https://picsum.photos/200",
+      "description": "Très jolie asticot",
+      "price": "1.00",
+      "id": 6
+    },
+    {
+      "user_id": 7,
+      "title": "Une roue",
+      "image": "https://picsum.photos/200",
+      "description": "Très belle roue c:",
+      "price": "20.00",
+      "id": 7
+    },
+    {
+      "user_id": 7,
+      "title": "Un cerceau",
+      "image": "https://picsum.photos/200",
+      "description": "Magnifique cerceau",
+      "price": "10.00",
+      "id": 8
     }
   ],
   "users": [

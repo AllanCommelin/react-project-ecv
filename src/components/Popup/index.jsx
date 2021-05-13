@@ -1,12 +1,21 @@
 import PropTypes from 'prop-types'
 
 const Popup = ({ children, onClose }) => (
-  <div className="absolute h-screen w-screen bg-gray-500 flex justify-center items-center" onClick={onClose}>
-    <div className="relative h-1/2 w-1/2 p-5 bg-white rounded" onClick={e => e.stopPropagation()}>
-      <button className="absolute top-5 right-5 cursor" onClick={onClose}>x</button>
-      <div className="mt-5">
-        {children}
-      </div>
+  <div
+    className="fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-90 flex justify-center items-center"
+    onClick={onClose}
+  >
+    <div
+      className="relative flex flex-col h-1/2 w-1/2 p-5 bg-white rounded"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        className="absolute top-5 right-5 cursor uppercase text-sm text-white rounded py-2 px-5 bg-red-700"
+        onClick={onClose}
+      >
+        close
+      </button>
+      <div className="mt-5 flex flex-col flex-grow justify-center">{children}</div>
     </div>
   </div>
 )
@@ -16,4 +25,4 @@ Popup.propTypes = {
   onClose: PropTypes.func.isRequired,
 }
 
-export default Popup;
+export default Popup

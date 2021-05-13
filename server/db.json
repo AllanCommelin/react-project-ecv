@@ -1,48 +1,124 @@
 {
   "articles": [
     {
-      "user_id": 7,
+      "id": 1,
       "title": "Une pomme",
       "image": "https://picsum.photos/200",
       "description": "Belle pomme rouge de 12cm de diamètre",
       "price": "2.30",
-      "id": 5
+      "user_id": 8,
+      "created_at": 1620568305139
     },
     {
-      "user_id": 7,
-      "title": "Awesome Asticot",
-      "image": "https://picsum.photos/200",
-      "description": "Très jolie asticot",
-      "price": "1.00",
-      "id": 6
+      "id": 3,
+      "title": "Une fraise",
+      "image": "https://picsum.photos/202",
+      "description": "Belle fraise rouge de 12cm de diamètre",
+      "price": "12.30",
+      "user_id": 3,
+      "created_at": 1620568305139
     },
     {
-      "user_id": 7,
-      "title": "Une roue",
-      "image": "https://picsum.photos/200",
-      "description": "Très belle roue c:",
-      "price": "20.00",
-      "id": 7
+      "id": 4,
+      "title": "Un abricot",
+      "image": "https://picsum.photos/203",
+      "description": "Beau abricot rouge de 12cm de diamètre",
+      "price": "6.30",
+      "user_id": 3,
+      "created_at": 1620568305139
     },
     {
+      "id": 5,
+      "title": "Une banane",
+      "image": "https://picsum.photos/204",
+      "description": "Belle banane jaune de 12cm de diamètre",
+      "price": "43.30",
+      "user_id": 3,
+      "created_at": 1620568305139
+    },
+    {
+      "id": 6,
+      "title": "Un kiwi",
+      "image": "https://picsum.photos/205",
+      "description": "Beau kiwi vert de 12cm de diamètre",
+      "price": "1.30",
+      "user_id": 8,
+      "created_at": 1620568305139
+    },
+    {
+      "id": 7,
+      "title": "Une mangue",
+      "image": "https://picsum.photos/206",
+      "description": "Belle mangue rouge de 12cm de diamètre",
+      "price": "6.30",
       "user_id": 7,
-      "title": "Un cerceau",
-      "image": "https://picsum.photos/200",
-      "description": "Magnifique cerceau",
-      "price": "10.00",
-      "id": 8
+      "created_at": 1620568305139
+    },
+    {
+      "id": 8,
+      "title": "Une orange",
+      "image": "https://picsum.photos/207",
+      "description": "Belle orange jaune de 12cm de diamètre",
+      "price": "43.30",
+      "user_id": 8,
+      "created_at": 1620568305139
+    },
+    {
+      "id": 9,
+      "title": "Un melon",
+      "image": "https://picsum.photos/208",
+      "description": "Beau melon vert de 12cm de diamètre",
+      "price": "1.30",
+      "user_id": 8,
+      "created_at": 1620568305139
+    },
+    {
+      "id": 10,
+      "title": "Une mandarine",
+      "image": "https://picsum.photos/209",
+      "description": "Belle mandarine rouge de 12cm de diamètre",
+      "price": "6.30",
+      "user_id": 7,
+      "created_at": 1620568305139
+    },
+    {
+      "id": 11,
+      "title": "Une cerise",
+      "image": "https://picsum.photos/210",
+      "description": "Belle cerise jaune de 12cm de diamètre",
+      "price": "43.30",
+      "user_id": 7,
+      "created_at": 1620568305139
+    },
+    {
+      "id": 12,
+      "title": "Un pamplemousse",
+      "image": "https://picsum.photos/211",
+      "description": "Beau pamplemousse vert de 12cm de diamètre",
+      "price": "1.30",
+      "user_id": 7,
+      "created_at": 1620568305139
+    },
+    {
+      "id": 13,
+      "title": "Un citron",
+      "image": "https://picsum.photos/212",
+      "description": "Beau citron vert de 12cm de diamètre",
+      "price": "1.30",
+      "user_id": 7,
+      "created_at": 1620568305139
     }
   ],
   "users": [
     {
-      "id": 3,
       "firstName": "Allan",
       "lastName": "Commelin",
       "birthday": "1998-02-04",
       "email": "allan@ecv.fr",
       "password": "$2a$10$OQAay8/a74zyKMkRpEyG5.T/UZIqu3NXvqv42GU8gEeHtmM2D1El6",
       "image": "https://images.genius.com/a88f42a366407942b045b4b6523f28f2.218x218x1.png",
-      "createdAt": 1620568305139
+      "createdAt": 1620568305139,
+      "id": 3
     },
     {
       "email": "user1@ecv.fr",
@@ -76,6 +152,17 @@
       "image": "https://cdn140.picsart.com/353719829024201.jpg",
       "createdAt": 1620909075889,
       "id": 7
+    },
+    {
+      "email": "theo.mackowiak@mail-ecv.fr",
+      "password": "$2a$10$93uWE/m13Q1dAQuldj344eutr8fZVLNIXHzgiZ1JEAKC5MPzGpUw.",
+      "firstName": "Théo",
+      "lastName": "Mackowiak",
+      "birthday": "0008-11-22",
+      "role": "user",
+      "image": "https://image.freepik.com/vecteurs-libre/chien-carlin-mignon-assis-bleu_138676-3039.jpg",
+      "createdAt": 1620769054157,
+      "id": 8
     }
   ]
 }

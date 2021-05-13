@@ -1,9 +1,30 @@
-import Auth from "../../hoc/auth";
+import { getArticles, retrieveArticles } from '../../store/articles'
+import { useDispatch, useSelector } from 'react-redux'
 
-const Home = () => (
+import ArticlePreview from '../../components/ArticlePreview'
+import Auth from '../../hoc/auth'
+import { useEffect } from 'react'
+
+const Home = () => {
+  const articles = useSelector(getArticles)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!articles.length) {
+      dispatch(retrieveArticles())
+    }
+  })
+
+  return (
     <>
-        <h1>Accueil</h1>
+      <h1 className="text-center py-10 font-bold text-2xl">Accueil</h1>
+      <div className="container mx-auto grid grid-cols-3 gap-4 mb-10">
+        {articles.slice(-3).map((article, index) => (
+          <ArticlePreview key={index} article={article} />
+        ))}
+      </div>
     </>
-)
+  )
+}
 
-export default Auth(Home);
+export default Auth(Home)

@@ -81,6 +81,18 @@ export const retrieveArticlesForHome = () => async (dispatch) => {
   }
 }
 
+export const retrieveArticlesByTitle = (title) => async (dispatch) => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}articles?title_like=${title}`, {
+      method: 'GET',
+    })
+    const data = await response.json()
+    dispatch(addArticles(data))
+  } catch (e) {
+    console.error(e)
+  }
+}
+
 export const retrieveFilteredArticles = (url) => async (dispatch) => {
   try {
     const response = await fetch(url, {

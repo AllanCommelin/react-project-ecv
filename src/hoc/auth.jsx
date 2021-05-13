@@ -32,11 +32,15 @@ const Auth = Component => {
                 }).then( async (res) => {
                     const data =  await res.json();
                     delete data.password
-                    if (res.status === 401) history.push('/login')
+                    if (res.status === 401) {
+                        Cookies.remove('jwt')
+                        return history.push('/login')
+                    }
+                
                     dispatch(addUser(data))
                 })
             }
-        })
+        }, [])
 
         return (
             <>

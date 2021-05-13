@@ -36,7 +36,9 @@ export const registerUser = user => async dispatch => {
             body: JSON.stringify(user)
         })
         const data = await response.json();
-        dispatch(addUser(data))
+        
+        Cookies.set('jwt', data.accessToken)
+
         return response.status === 201
     } catch(e) {
         console.error(e)

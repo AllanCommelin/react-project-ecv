@@ -35,7 +35,7 @@ const RegisterForm = () => {
     const isOk = await dispatch(registerUser(fields))
 
     if (isOk) {
-      history.push("/login")
+      history.push("/articles")
     } else {
       setError('Une erreur est survenue !')
     }

@@ -41,5 +41,16 @@
       "createdAt": 1620569211520,
       "id": 6
     },
+    {
+      "email": "bduez@eproduct.fr",
+      "password": "$2a$10$dckHQsXk4lRFnYYGCZIqNuztx6ISkPDgtWszyudVsdxgHBiEkqAKi",
+      "firstName": "Benjamin",
+      "lastName": "Duez",
+      "birthday": "1998-02-13",
+      "role": "user",
+      "image": "https://cdn140.picsart.com/353719829024201.jpg",
+      "createdAt": 1620909075889,
+      "id": 7
+    }
   ]
 }

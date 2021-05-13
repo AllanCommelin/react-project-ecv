@@ -85,17 +85,11 @@ const Article = () => {
 
     const showArticle = () => (
         <>
-            <div className="p-4">
-                <fieldset className="border border-custom-main-color py-2 px-4 rounded-sm">
-                    <legend className="bg-white text-custom-main-color px-2">Titre</legend>
-                    <span className="px-2 font-bold">{article.title}</span>
-                </fieldset>
-            </div>
-            <div className="p-4">
-                <fieldset className="border border-custom-main-color py-2 px-4 rounded-sm">
-                    <legend className="bg-white text-custom-main-color px-2">Image</legend>
-                    <img className="w-50 h-50 rounded-full object-cover" src={article.image} alt='image article'/>
-                </fieldset>
+         <div className="p-4">
+              <div className="text-center">
+                <img className="w-28 h-28 mx-auto rounded-full object-cover" src={article.image} alt='image article'/>
+                <p className="text-2xl font-bold text-custom-main-color pt-2">{article.title}</p>
+              </div>
             </div>
             <div className="p-4">
                 <fieldset className="border border-custom-main-color py-2 px-4 rounded-sm">
@@ -108,6 +102,16 @@ const Article = () => {
                     <legend className="bg-white text-custom-main-color px-2">Prix</legend>
                     <span className="px-2 font-bold">{article.price}</span>
                 </fieldset>
+            </div>
+            <div className="p-4">
+                <Input 
+                    label="Quantité"
+                    id="price"
+                    type="number"
+                    placeholder="1"
+                    value="1"
+                    />
+                <Button className="mt-4" text="Commander" />
             </div>
         </>
     )
@@ -144,7 +148,7 @@ const Article = () => {
     console.log({user: user, article: article})
 
     const edifyButton = () => (
-        <div>
+        <div className="ml-auto">
             <button className="p-2 rounded-sm bg-custom-dark-color border-2 border-custom-dark-color text-custom-light-color" onClick={() => btnAction()}>{ toUpdate ? 'Enregistrer' : 'Modifier' }</button>
         </div>
     )
@@ -154,11 +158,6 @@ const Article = () => {
         {displayBanner && <Banner text="L'article a été mise à jour avec succès" close={closeBanner} />}
         <div className="p-8 rounded-md shadow-lg">
             <div className="flex justify-between">
-                <div className="flex items-center">
-                    <h1 className="font-black text-2xl text-custom-darker-color">
-                        Édition d'article
-                    </h1>
-                </div>
                 { user.id === article.user_id ? edifyButton() : null}
             </div>
             { toUpdate ? editArticle() : showArticle() }

@@ -12,7 +12,7 @@ const ArticlePreview = ({ article, displayPopup }) => {
   return (
     <div
       className="flex flex-col p-4 border-2 shadow-md rounded-md cursor-pointer"
-      onClick={() => history.push(`/articles/${article.id}`)}
+      onClick={() => history.push(`/article/${article.id}`)}
     >
       <span
         data-user-id={article.user_id}

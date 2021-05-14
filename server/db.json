@@ -98,6 +98,14 @@
       "price": "1.30",
       "user_id": 7,
       "created_at": 1620568305139
+    },
+    {
+      "user_id": 8,
+      "title": "Une framboise",
+      "image": "https://picsum.photos/200",
+      "description": "Une belle framboise rose de 12cm de diamètre",
+      "price": "14.50",
+      "id": 14
     }
   ],
   "users": [

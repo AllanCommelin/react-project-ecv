@@ -14,7 +14,7 @@ import ConfirmationPopup from '../../components/ConfirmationPopup'
 import Input from '../../components/Input'
 import ReactPaginate from 'react-paginate'
 import { getCurrentUser } from '../../store/users'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 const Articles = () => {
   const limit = 3
@@ -90,8 +90,8 @@ const Articles = () => {
       return (
         <div className="flex justify-center">
           <ReactPaginate
-            previousLabel={'previous'}
-            nextLabel={'next'}
+            previousLabel={'Précédent'}
+            nextLabel={'Suivant'}
             breakLabel={'...'}
             breakClassName={'break-me'}
             pageCount={pageCount}
@@ -103,7 +103,7 @@ const Articles = () => {
             previousClassName={'py-2 px-3 flex items-center'}
             nextClassName={'py-2 px-3 flex items-center'}
             disabledClassName={'opacity-60'}
-            activeClassName={'text-bold text-blue-700'}
+            activeClassName={'font-bold text-custom-main-color'}
           />
         </div>
       )
@@ -116,11 +116,11 @@ const Articles = () => {
         <ConfirmationPopup onClose={() => setDisplayPopup(false)} confirmed={removeArticle} />
       )}
 
-      <h1 className="text-center py-10 font-bold text-2xl">Articles</h1>
+      <h1 className="text-center py-10 font-bold text-4xl">Liste des <br/><span className="font-black text-custom-main-color">articles</span></h1>
 
       <div className="container mx-auto flex flex-col mb-10">
-        <div className="flex space-around mb-5">
-          <form onSubmit={submitForm} className="w-1/3 m-auto flex items-end">
+        <div className="flex justify-between mb-5">
+          <form onSubmit={submitForm} className="w-1/3 flex items-end">
             <Input
               label="Rechercher"
               className="mb-1"
@@ -129,11 +129,11 @@ const Articles = () => {
               value={fields.term}
               handleChange={handleChangeField}
             />
-            <Button className="ml-2" type="submit" text="Rechercher" />
+            <Button className="ml-2 bg-custom-main-color text-custom-light-color" type="submit" text="Rechercher" />
           </form>
 
           <button
-            className="bg-green-500 rounded px-5 py-2 mb-5 self-end"
+            className="bg-green-500 text-custom-light-color rounded px-5 py-2 mb-5 self-end"
             onClick={() => history.push('/article/create')}
           >
             Ajouter un article

@@ -40,7 +40,7 @@ const Auth = Component => {
                     dispatch(addUser(data))
                 })
             }
-        }, [])
+        }, [dispatch, history, location.pathname, user])
 
         return (
             <>

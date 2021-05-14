@@ -1,25 +1,22 @@
-import { getArticle, getArticles, retrieveArticle, updateArticle } from '../../store/articles'
-import { getCurrentUser, getUser, retrieveUser } from '../../store/users'
+import { getArticle, retrieveArticle, updateArticle } from '../../store/articles'
+import { getCurrentUser } from '../../store/users'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-
 import Auth from '../../hoc/auth'
 import Banner from '../../components/Banner'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import Textarea from '../../components/Textarea'
-import { useHistory } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
 const Article = () => {
-  const history = useHistory()
   const dispatch = useDispatch()
 
   let { id } = useParams()
 
   useEffect(() => {
     dispatch(retrieveArticle(id))
-  }, [])
+  }, [dispatch, id])
 
   const article = useSelector((state) => getArticle(state, id))
   const user = useSelector(getCurrentUser)
@@ -76,7 +73,7 @@ const Article = () => {
           value={fields.price}
           handleChange={handleChangeField}
         />
-        <Button className="mt-4" type="submit" text="Enregistrer" />
+        <Button className="mt-4 bg-custom-main-color text-custom-light-color" type="submit" text="Enregistrer" />
       </form>
     </>
   )
@@ -88,7 +85,7 @@ const Article = () => {
           <img
             className="w-28 h-28 mx-auto rounded-full object-cover"
             src={article.image}
-            alt="image article"
+            alt="article"
           />
           <p className="text-2xl font-bold text-custom-main-color pt-2">{article.title}</p>
         </div>
@@ -107,17 +104,19 @@ const Article = () => {
       </div>
       <div className="p-4">
         <div className="flex flex-col mt-10">
-          <label className="block text-sm font-medium text-gray-700" htmlFor="quantity">
-            Quantité
+          <label className="block text-sm font-medium text-custom-main-color" htmlFor="quantity">
+            Quantité*
           </label>
           <input
             id="quantity"
             type="number"
-            className="rounded-md mt-1 border p-2 border-gray-400"
+            min="1"
+            className="rounded-sm mt-1 border p-2 border-custom-main-color"
             placeholder="1"
           />
         </div>
-        <Button className="mt-4" text="Commander" />
+        {error && <div className="p-4 my-4 rounded-md bg-red-100 border border-red-900"><p className="text-red-900">{error}</p></div>}
+        <Button className="mt-4 bg-custom-main-color text-custom-light-color" text="Commander" />
       </div>
     </>
   )

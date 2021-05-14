@@ -94,7 +94,7 @@ const CreateArticle = () => {
           value={fields.price}
           handleChange={handleChangeField}
         />
-        <Button className="mt-4" type="submit" text="Ajouter article" />
+        <Button className="mt-4 bg-custom-main-color text-custom-light-color" type="submit" text="Ajouter article" />
       </form>
     </div>
     </>

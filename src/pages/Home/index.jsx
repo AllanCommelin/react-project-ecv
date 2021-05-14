@@ -1,19 +1,22 @@
 import { getArticles, retrieveArticlesForHome } from '../../store/articles'
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 
 import ArticlePreview from '../../components/ArticlePreview'
 import Auth from '../../hoc/auth'
-import { useEffect } from 'react'
 
 const Home = () => {
   const articles = useSelector(getArticles)
   const dispatch = useDispatch()
 
+  const [isFetched, setIsFetched] = useState(false)
+
   useEffect(() => {
-    if (!articles.length) {
+    if (!articles.length || !isFetched) {
       dispatch(retrieveArticlesForHome())
+      setIsFetched(true)
     }
-  })
+  }, [articles.length, isFetched, dispatch])
 
   return (
     <>

@@ -64,15 +64,6 @@
       "created_at": 1620568305139
     },
     {
-      "id": 9,
-      "title": "Un melon",
-      "image": "https://picsum.photos/208",
-      "description": "Beau melon vert de 12cm de diamètre",
-      "price": "1.30",
-      "user_id": 8,
-      "created_at": 1620568305139
-    },
-    {
       "id": 10,
       "title": "Une mandarine",
       "image": "https://picsum.photos/209",

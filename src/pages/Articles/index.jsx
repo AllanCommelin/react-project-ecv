@@ -12,10 +12,12 @@ import Auth from '../../hoc/auth'
 import Button from '../../components/Button'
 import ConfirmationPopup from '../../components/ConfirmationPopup'
 import Input from '../../components/Input'
+import ReactPaginate from 'react-paginate'
 import { getCurrentUser } from '../../store/users'
 import { useHistory } from 'react-router'
 
 const Articles = () => {
+  const limit = 3
   const history = useHistory()
   const dispatch = useDispatch()
   const user = useSelector(getCurrentUser)
@@ -23,16 +25,19 @@ const Articles = () => {
 
   const [displayPopup, setDisplayPopup] = useState(false)
   const [articleIdToRemove, setArticleIdToRemove] = useState(false)
+  const [activePage, setActivePage] = useState(0)
+  const [isFetched, setIsFetched] = useState(false)
 
   const [fields, setFields] = useState({
     term: '',
   })
 
   useEffect(() => {
-    if (!articles.length) {
+    if (!articles.length || !isFetched) {
       dispatch(retrieveArticles())
+      setIsFetched(true)
     }
-  })
+  }, [articles.length, isFetched, dispatch])
 
   const removeArticle = () => {
     dispatch(removeArticleById(articleIdToRemove))
@@ -51,11 +56,57 @@ const Articles = () => {
     event.preventDefault()
 
     const term = event.target.querySelector('input[name="term"]').value
+    setActivePage(0)
 
     if (term !== null && term.length > 0) {
       dispatch(retrieveArticlesByTitle(term))
     } else {
       dispatch(retrieveArticles())
+    }
+  }
+
+  const handlePageChange = (e) => {
+    setActivePage(e.selected)
+  }
+
+  const articlesList = () => {
+    return articles
+      .slice(activePage * limit, activePage * limit + 3)
+      .map((article, index) => (
+        <ArticlePreview
+          key={index}
+          article={article}
+          displayPopup={
+            user !== null && article.user_id === user.id ? displayConfirmationPopup : null
+          }
+        />
+      ))
+  }
+
+  const Pagination = () => {
+    const pageCount = Math.round(articles.length / 3)
+
+    if (pageCount > 1) {
+      return (
+        <div className="flex justify-center">
+          <ReactPaginate
+            previousLabel={'previous'}
+            nextLabel={'next'}
+            breakLabel={'...'}
+            breakClassName={'break-me'}
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={2}
+            onPageChange={handlePageChange}
+            containerClassName={'flex justify-center divide-x p-2 mt-8 border-2 rounded'}
+            pageClassName={'py-2 px-3 flex items-center'}
+            previousClassName={'py-2 px-3 flex items-center'}
+            nextClassName={'py-2 px-3 flex items-center'}
+            disabledClassName={'opacity-60'}
+            activeClassName={'text-bold text-blue-700'}
+          />
+        </div>
+      )
     }
   }
 
@@ -89,17 +140,9 @@ const Articles = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-3 gap-4">
-          {articles.map((article, index) => (
-            <ArticlePreview
-              key={index}
-              article={article}
-              displayPopup={
-                user !== null && article.user_id === user.id ? displayConfirmationPopup : null
-              }
-            />
-          ))}
-        </div>
+        <div className="grid grid-cols-3 gap-4">{articlesList()}</div>
+
+        {Pagination()}
       </div>
     </>
   )

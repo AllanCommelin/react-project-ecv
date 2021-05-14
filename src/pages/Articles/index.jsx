@@ -84,7 +84,7 @@ const Articles = () => {
   }
 
   const Pagination = () => {
-    const pageCount = Math.round(articles.length / 3)
+    const pageCount = Math.ceil(articles.length / 3)
 
     if (pageCount > 1) {
       return (
